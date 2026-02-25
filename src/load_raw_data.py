@@ -25,7 +25,7 @@ def upload_raw_data(s3_client, bucket_name, data):
     json_string = json.dumps(data)
     s3_client.put_object(
         Bucket=bucket_name,
-        Key=file_name,
+        Key=f"posts/{today.strftime('%Y/%m/%d')}/{file_name}",
         Body=json_string.encode('utf-8'),
         ContentType="application/json"
     )
