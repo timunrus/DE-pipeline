@@ -23,6 +23,7 @@ def transform_data(data):
 
     df = df[["id", "userId", "title"]]
     df = df.rename(columns={"userId": "user_id"})
+    df["title_length"] = df["title"].str.len()
 
     buffer = io.BytesIO()
     df.to_parquet(buffer, index=False, engine='pyarrow')
