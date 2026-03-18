@@ -1,5 +1,5 @@
 import pandas as pd
-from s3_client import get_s3_client
+from src.s3_client import get_s3_client
 from datetime import datetime
 import io
 from botocore.exceptions import ClientError

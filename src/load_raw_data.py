@@ -1,7 +1,7 @@
 import requests
 import json
 from datetime import datetime
-from s3_client import get_s3_client
+from src.s3_client import get_s3_client
 from botocore.exceptions import ClientError
 
 def fetch_posts():
