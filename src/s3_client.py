@@ -3,7 +3,7 @@ from botocore.client import Config
 
 
 def get_s3_client():
-    endpoint = 'http://localhost:9000'
+    endpoint = 'http://minio:9000'
     access_key = 'minioadmin'
     secret_key = 'minioadmin'
     s3_client = boto3.client(
