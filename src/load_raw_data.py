@@ -6,8 +6,12 @@ from botocore.exceptions import ClientError
 
 def fetch_posts():
     url = "https://jsonplaceholder.typicode.com/posts"
-    response = requests.get(url)
-    response.raise_for_status()
+    try:
+        response = requests.get(url)
+        response.raise_for_status()
+    except requests.exceptions.RequestException as e:
+        print(f"Ошибка при запросе API - {e}")
+        raise
     data = response.json()
     return data
 
@@ -33,10 +37,12 @@ def upload_raw_data(s3_client, bucket_name, data):
 
 
 def main():
+    print(f"Загрузка данных из API")
     s3_client = get_s3_client()
     bucket_name = "raw"
     data = fetch_posts()
     bucket_exists(s3_client, bucket_name)
+    print(f"Загрузка файла в {bucket_name}")
     upload_raw_data(s3_client, bucket_name, data)
 
 

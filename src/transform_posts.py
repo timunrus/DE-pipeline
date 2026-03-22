@@ -61,7 +61,9 @@ def main():
     today = datetime.today()
     file_name = f"posts_{today.strftime('%Y-%m-%d')}.json"
     key = f"posts/{today.strftime('%Y/%m/%d')}/{file_name}"
+    print(f"Читаем данные из {bucket_name}")
     data = read_raw_data(s3_client, bucket_name, key)
+    print("Трансформация данных...")
     df, parquet_buffer = transform_data(data)
     upload_parquet_to_staging(s3_client, parquet_buffer)
 

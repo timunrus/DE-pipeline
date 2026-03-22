@@ -55,13 +55,16 @@ def save_parquet_to_mart(s3_client, user_stats):
 
 
 def main():
+    print("Создание витрины")
     today = datetime.today()
     bucket_name = "staging"
     file_name = f"posts_{today.strftime('%Y-%m-%d')}.parquet"
     key = f"posts/{today.strftime('%Y/%m/%d')}/{file_name}"
     s3_client = get_s3_client()
+    print(f"Чтение бакета {bucket_name}")
     df = read_staging_data(s3_client, bucket_name, key)
     user_stats = create_user_stats(df)
+    print("Сохраняем витрину")
     save_parquet_to_mart(s3_client, user_stats)
 
 
